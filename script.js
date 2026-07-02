@@ -86,6 +86,29 @@ function copyCoupon(code) {
     });
 }
 
+function initFilters() {
+    const filterToggleBtn = document.getElementById('filterToggleBtn');
+    const filtersSection = document.getElementById('filtersSection');
+    const filtersClose = document.getElementById('filtersClose');
+    const filtersOverlay = document.getElementById('filtersOverlay');
+
+    function openFilters() {
+        filtersSection.classList.add('open');
+        filtersOverlay.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeFilters() {
+        filtersSection.classList.remove('open');
+        filtersOverlay.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+
+    filterToggleBtn.addEventListener('click', openFilters);
+    filtersClose.addEventListener('click', closeFilters);
+    filtersOverlay.addEventListener('click', closeFilters);
+}
+
 function renderFilters(products) {
     const marketplaces = [...new Set(products.map(p => p['Marketplace']).filter(Boolean))];
     const categories = [...new Set(products.map(p => p['Categoria']).filter(Boolean))];
@@ -200,6 +223,7 @@ async function loadProducts() {
 
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
+    initFilters();
     document.getElementById('themeToggle').addEventListener('click', toggleTheme);
     loadProducts();
 });

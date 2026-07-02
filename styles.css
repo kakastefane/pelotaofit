@@ -406,7 +406,135 @@ body {
     opacity: 1;
 }
 
+.filter-toggle-btn {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--green), var(--yellow));
+    border: none;
+    border-radius: 50px;
+    padding: 0.75rem 1.25rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #000;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s;
+}
+
+.filter-toggle-btn:hover {
+    opacity: 0.9;
+}
+
+.filter-icon {
+    font-size: 1.1rem;
+}
+
+.filters-header {
+    display: none;
+}
+
+.filters-overlay {
+    display: none;
+}
+
 @media (max-width: 640px) {
+    .filter-toggle-btn {
+        display: flex;
+    }
+
+    .filters-section {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 85%;
+        max-width: 320px;
+        height: 100vh;
+        background: var(--bg);
+        z-index: 200;
+        padding: 1.5rem;
+        overflow-y: auto;
+        transition: right 0.3s ease;
+        box-shadow: -4px 0 20px rgba(0,0,0,0.2);
+    }
+
+    .filters-section.open {
+        right: 0;
+    }
+
+    .filters-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .filters-header h3 {
+        font-size: 1.25rem;
+        font-weight: 700;
+    }
+
+    .filters-close {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+    }
+
+    .filters-close:hover {
+        border-color: var(--green);
+    }
+
+    .filter-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .filter-label {
+        min-width: auto;
+    }
+
+    .filters {
+        width: 100%;
+    }
+
+    .filter-btn {
+        flex: 1;
+        min-width: calc(50% - 0.25rem);
+        text-align: center;
+    }
+
+    .filters-overlay {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 190;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+    }
+
+    .filters-overlay.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
     .products-grid {
         grid-template-columns: 1fr;
     }

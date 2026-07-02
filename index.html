@@ -25,7 +25,16 @@
     </header>
 
     <main class="main">
-        <section class="filters-section">
+        <button class="filter-toggle-btn" id="filterToggleBtn">
+            <span>Filtros</span>
+            <span class="filter-icon">⚙️</span>
+        </button>
+
+        <section class="filters-section" id="filtersSection">
+            <div class="filters-header">
+                <h3>Filtros</h3>
+                <button class="filters-close" id="filtersClose">✕</button>
+            </div>
             <div class="filter-group">
                 <span class="filter-label">Marketplace:</span>
                 <div class="filters" id="marketplaceFilters">
@@ -39,6 +48,7 @@
                 </div>
             </div>
         </section>
+        <div class="filters-overlay" id="filtersOverlay"></div>
 
         <section class="products-section">
             <div class="products-grid" id="productsGrid"></div>
