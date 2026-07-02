@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pelotão Fit - Melhores ofertas em suplementos e produtos fitness">
+    <meta name="theme-color" content="#00D26A">
+    <title>Pelotão Fit - Ofertas Fitness</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-text">PELOTÃO <span class="logo-fit">FIT</span></span>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+                <span class="icon-sun">☀️</span>
+                <span class="icon-moon">🌙</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="filters-section">
+            <div class="filters" id="filters">
+                <button class="filter-btn active" data-marketplace="todos">Todos</button>
+            </div>
+        </section>
+
+        <section class="products-section">
+            <div class="products-grid" id="productsGrid"></div>
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Carregando ofertas...</p>
+            </div>
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <p>Nenhum produto encontrado.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Pelotão Fit</p>
+    </footer>
+
+    <div class="toast" id="toast">Cupom copiado!</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
