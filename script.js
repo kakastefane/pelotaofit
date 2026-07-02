@@ -2,7 +2,8 @@ const SPREADSHEET_ID = '1hPgybWkV7IvufGKcMT6OU-JPwlh8Xt8-PHIzLPi_wGg';
 const CSV_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/export?format=csv`;
 
 let allProducts = [];
-let activeFilter = 'todos';
+let activeMarketplace = 'todos';
+let activeCategory = 'todos';
 
 function initTheme() {
     const saved = localStorage.getItem('theme');
@@ -87,23 +88,44 @@ function copyCoupon(code) {
 
 function renderFilters(products) {
     const marketplaces = [...new Set(products.map(p => p['Marketplace']).filter(Boolean))];
-    const container = document.getElementById('filters');
+    const categories = [...new Set(products.map(p => p['Categoria']).filter(Boolean))];
+    
+    const marketplaceContainer = document.getElementById('marketplaceFilters');
+    const categoryContainer = document.getElementById('categoryFilters');
 
-    container.innerHTML = '<button class="filter-btn active" data-marketplace="todos">Todos</button>';
+    marketplaceContainer.innerHTML = '<button class="filter-btn active" data-marketplace="todos">Todos</button>';
+    categoryContainer.innerHTML = '<button class="filter-btn active" data-category="todos">Todas</button>';
 
     marketplaces.forEach(mp => {
         const btn = document.createElement('button');
         btn.className = 'filter-btn';
         btn.setAttribute('data-marketplace', mp);
         btn.textContent = mp;
-        container.appendChild(btn);
+        marketplaceContainer.appendChild(btn);
     });
 
-    container.addEventListener('click', (e) => {
+    categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.setAttribute('data-category', cat);
+        btn.textContent = cat;
+        categoryContainer.appendChild(btn);
+    });
+
+    marketplaceContainer.addEventListener('click', (e) => {
         if (e.target.classList.contains('filter-btn')) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            marketplaceContainer.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             e.target.classList.add('active');
-            activeFilter = e.target.getAttribute('data-marketplace');
+            activeMarketplace = e.target.getAttribute('data-marketplace');
+            renderProducts();
+        }
+    });
+
+    categoryContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('filter-btn')) {
+            categoryContainer.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+            activeCategory = e.target.getAttribute('data-category');
             renderProducts();
         }
     });
@@ -111,9 +133,11 @@ function renderFilters(products) {
 
 function renderProducts() {
     const grid = document.getElementById('productsGrid');
-    const filtered = activeFilter === 'todos'
-        ? allProducts
-        : allProducts.filter(p => p['Marketplace'] === activeFilter);
+    const filtered = allProducts.filter(p => {
+        const matchMarketplace = activeMarketplace === 'todos' || p['Marketplace'] === activeMarketplace;
+        const matchCategory = activeCategory === 'todos' || p['Categoria'] === activeCategory;
+        return matchMarketplace && matchCategory;
+    });
 
     if (filtered.length === 0) {
         grid.innerHTML = '';
@@ -147,6 +171,7 @@ function renderProducts() {
                             <span class="coupon-code">${product['Cupom']}</span>
                             <span class="coupon-copy">copiar</span>
                         </div>
+                        ${product['Regra Cupom'] ? `<p class="coupon-rule">${product['Regra Cupom']}</p>` : ''}
                     ` : ''}
                     <div class="product-hashtags">${hashtags}</div>
                     <div class="product-cta">
