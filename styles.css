@@ -147,7 +147,9 @@ body {
 .coupon-rule {
     font-size: 0.7rem;
     color: var(--text-secondary);
-    margin-top: 0.375rem;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border);
     font-style: italic;
 }
 
@@ -309,6 +311,9 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 0.375rem;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
 }
 
 .hashtag {
